@@ -1,14 +1,22 @@
-import { Counter } from "$/views/counter";
-import jsxpineLogo from "/jsxpine.jpg";
-import viteLogo from "/vite.svg";
+import AppLayout from '$/pages/AppLayout';
+import Login from '$/pages/Login';
+import { Toaster } from 'react-hot-toast';
+import { Route, Routes } from 'react-router-dom';
 
-export function App() {
-  const readDoccs = new Intl.ListFormat("en", {
-    style: "long",
-    type: "disjunction",
-  }).format(["vite", "jsxpine"]);
-
+const App = () => {
   return (
-    <div class="text-2xl font-bold text-center ">hello world</div>
-  );
+    <>
+      <Toaster position="top-right" toastOptions={{ duration: 3000,
+         style: { background: '#1b3022', color: '#fff', 
+         borderRadius: '12px', fontSize: '14px' } }}  />
+
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<AppLayout />} />
+    </Routes>
+
+    </>
+  )
 }
+
+export default App;

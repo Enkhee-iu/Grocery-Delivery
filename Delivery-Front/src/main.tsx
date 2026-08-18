@@ -1,13 +1,10 @@
-import '$/styles/index.css';
-import { App } from '$/views/app';
-import Alpine from 'alpinejs';
 
-await import("$/views/counter/script").then((m) =>
-  Alpine.data("counter", m.default)
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./views/app";
+
+createRoot(document.getElementById("app")!).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 );
-
-window.Alpine = Alpine;
-
-Alpine.start();
-
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = String(<App />);
