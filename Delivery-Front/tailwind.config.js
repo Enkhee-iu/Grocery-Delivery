@@ -25,6 +25,12 @@ export default {
 				]
 			},
 			colors: {
+				app: {
+					DEFAULT: "#1f2937",
+					green: "#0aad0a",
+					cream: "#fff7e6",
+					"text-light": "#6b7280"
+				},
 				base: {
 					DEFAULT: colors.slate[500],
 					dark: colors.slate[800],
@@ -108,4 +114,3 @@ export default {
 		})
 	]
 };
-
