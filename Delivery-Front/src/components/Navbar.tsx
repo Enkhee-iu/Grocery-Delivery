@@ -1,0 +1,47 @@
+import { BikeIcon, SearchIcon } from "lucide-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+
+const Navbar = () => {
+    const user: any = {name: "John Doe", email: "john@example.com",  
+        isAdmin: true}
+        const {cartCount, setIsCartOpen} = {
+            cartCount: 5,
+            setIsCartOpen: (_data:any)=> {}
+        };
+        const [searchQuery, setSearchQuery] = useState("")
+        const [userMenuOpen, setUserMenuOpen] = useState(false)
+        const navigate = useNavigate()
+
+    return(
+        <nav className="bg-white sticky top-0 z-50 border-b border-app-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center
+        justify-between h-16 gap-4">
+        <Link to="/" className="flex items-center gap-2 text-[22px] font-medium
+        shrink-0" >
+            <BikeIcon size={24}/> Instacart
+        </Link>
+        <div className="w-full flex items-center justify-end gap-4 lg:gap-10">
+            <div className="hidden md:flex items-center gap-6 text-sm text-zinc-600">
+            <Link to='/'>Home</Link>
+            <Link to='/products'>Products</Link>
+            <Link to='/deals' className="text-orange-400">Deals</Link>
+            </div>
+            <form className="hidden sm:flex flex-1 max-w-sm text-xs sm:text-sm">
+                <div className="relative w-full">
+                 <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-500" />
+                 <input type="text"
+                 placeholder="Search for groceries..."
+                 value={searchQuery}
+                 onChange={(e) =>setSearchQuery(e.target.value)} 
+                 className="w-full rounded-full bg-orange-50 py-2 pl-10 pr-3 ring-1 ring-orange-500/15 focus:outline-none focus:ring-2 focus:ring-orange-500/30" />
+                 </div>
+            </form>
+        </div>
+        </div>
+        </nav>
+    )
+}
+
+export default Navbar
