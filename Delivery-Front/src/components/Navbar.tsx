@@ -1,13 +1,13 @@
-import { ArrowUpRightIcon, BikeIcon, ChevronDownIcon, MapPinIcon, MenuIcon, PackageIcon, SearchIcon, ShieldIcon, ShoppingCartIcon, UserIcon, XIcon } from "lucide-react";
+import { ArrowUpRightIcon, BikeIcon, ChevronDownIcon, LogOutIcon, MapPinIcon, MenuIcon, PackageIcon, SearchIcon, ShieldIcon, ShoppingCartIcon, UserIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const user: { name: string; email: string; isAdmin: boolean } | null = {
+  const [user, setUser] = useState<{ name: string; email: string; isAdmin: boolean } | null>({
     name: "John Doe",
     email: "john@example.com",
     isAdmin: true,
-  };
+  });
 
   const { cartCount, setIsCartOpen } = {
     cartCount: 5,
@@ -26,6 +26,12 @@ const Navbar = () => {
     if (!trimmedQuery) return;
 
     navigate(`/products?search=${encodeURIComponent(trimmedQuery)}`);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setUserMenuOpen(false);
+    navigate("/", { replace: true });
   };
 
   return (
@@ -136,8 +142,12 @@ const Navbar = () => {
                               )}
                               {user && (
                                 <div className="border-t border-zinc-200 pt-1">
-                                  <button className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-600 transition-colors hover:bg-red-50">
-
+                                  <button
+                                    type="button"
+                                    onClick={handleLogout}
+                                    className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-600 transition-colors hover:bg-red-50"
+                                  >
+                                    <LogOutIcon size={16}/> LogOut
                                   </button>
                                 </div>
                               )}
