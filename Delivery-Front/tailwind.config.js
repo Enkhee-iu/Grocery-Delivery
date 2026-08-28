@@ -29,6 +29,7 @@ export default {
 					DEFAULT: "#1f2937",
 					green: "#0aad0a",
 					cream: "#fff7e6",
+					border: "#e5e7eb",
 					"text-light": "#6b7280"
 				},
 				base: {
@@ -97,9 +98,18 @@ export default {
 	},
 	plugins: [
 		plugin(function ({
+			addUtilities,
 			matchUtilities,
 			theme
 		}) {
+			addUtilities({
+				'.flex-center': {
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center'
+				}
+			})
+
 			matchUtilities(
 				{
 					size: (/** @type {string} */ value) => ({
