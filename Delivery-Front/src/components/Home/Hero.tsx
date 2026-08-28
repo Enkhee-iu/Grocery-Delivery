@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section className="relative mb-10 flex min-h-[540px] items-center overflow-hidden rounded-3xl">
       <img src={heroBg} alt="Hero" className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-r from-app-green via-app-green/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r  to-transparent" />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
         <div className="max-w-xl xl:pl-10">
