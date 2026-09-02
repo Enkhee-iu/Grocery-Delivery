@@ -51,6 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
       return [...prevItems, { productId: product.id, quantity, product }];
     });
+    setIsCartOpen(true);
   };
 
   const removeFromCart = (productId: string) => {
