@@ -1,6 +1,7 @@
 import { ArrowUpRightIcon, BikeIcon, ChevronDownIcon, LogOutIcon, MapPinIcon, MenuIcon, PackageIcon, SearchIcon, ShieldIcon, ShoppingCartIcon, UserIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const [user, setUser] = useState<{ name: string; email: string; isAdmin: boolean } | null>({
@@ -9,10 +10,7 @@ const Navbar = () => {
     isAdmin: true,
   });
 
-  const { cartCount, setIsCartOpen } = {
-    cartCount: 5,
-    setIsCartOpen: (_data: boolean) => {},
-  };
+  const { cartCount, setIsCartOpen } = useCart();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -46,7 +44,7 @@ const Navbar = () => {
           <div className="hidden items-center gap-6 text-sm text-zinc-600 md:flex">
             <Link to="/">Home</Link>
             <Link to="/products">Products</Link>
-            <Link to="/deals" className="text-orange-400">
+            <Link to="/flash-deals" className="text-orange-400">
               Deals
             </Link>
           </div>
@@ -131,7 +129,7 @@ const Navbar = () => {
                               {user && <Link to="/products" className={dropdownLinkClassName}><ArrowUpRightIcon
                               size={16}/>Products</Link>}
 
-                                {user && <Link to="/deals" className={dropdownLinkClassName}><ArrowUpRightIcon
+                                {user && <Link to="/flash-deals" className={dropdownLinkClassName}><ArrowUpRightIcon
                               size={16}/>Deals</Link>}
                               {user?.isAdmin && (
                                 <Link to="/admin/products" className={dropdownLinkClassName}><ShieldIcon

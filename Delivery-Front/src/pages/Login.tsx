@@ -73,7 +73,7 @@ const Login = () => {
                         <MailIcon className="absolute mt-3 left-3.5 top-1/2-translate-y-1/2 size-4 text-app-text-light"/>
                         <input 
                         type="email"
-                        value={name}
+                        value={email}
                         onChange={(e)=>setEmail(e.target.value)}
                         required
                         placeholder="you@example.com"
@@ -90,7 +90,7 @@ const Login = () => {
                       <div className="relative ">
                         <LockIcon className="absolute mt-3 left-3.5 top-1/2-translate-y-1/2 size-4 text-app-text-light"/>
                         <input 
-                        type="email"
+                        type="password"
                         value={password}
                         onChange={(e)=>setPassword(e.target.value)}
                         required

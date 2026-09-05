@@ -1,14 +1,14 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 type Product = {
-  id: string;
+  id: string | number;
   name: string;
   price?: number;
   image?: string;
 };
 
 type CartItem = {
-  productId: string;
+  productId: string | number;
   quantity: number;
   product: Product;
 };
@@ -16,8 +16,8 @@ type CartItem = {
 interface CartContextType {
   items: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (productId: string | number) => void;
+  updateQuantity: (productId: string | number, quantity: number) => void;
   clearCart: () => void;
   cartCount: number;
   cartTotal: number;
@@ -54,11 +54,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsCartOpen(true);
   };
 
-  const removeFromCart = (productId: string) => {
+  const removeFromCart = (productId: string | number) => {
     setItems((prevItems: CartItem[]) => prevItems.filter((item: CartItem) => item.productId !== productId));
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId: string | number, quantity: number) => {
     if (quantity <= 0) {
       removeFromCart(productId);
       return;

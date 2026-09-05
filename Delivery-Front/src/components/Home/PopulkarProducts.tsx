@@ -3,6 +3,7 @@ import dairyEggs from "../../assets/dairy_eggs.png"
 import bakery from "../../assets/bakery.png"
 import drinks from "../../assets/drinks.png"
 import pantryStaples from "../../assets/pantry_staples.png"
+import { useCart } from "../../context/CartContext"
 
 type Product = {
   id: number
@@ -29,6 +30,7 @@ const dummyProducts: Product[] = [
 
 const PopularProducts = () => {
   const products = dummyProducts.slice(0, 10)
+  const { addToCart } = useCart()
 
   return (
     <section className="pb-16">
@@ -61,7 +63,11 @@ const PopularProducts = () => {
                     <span className="text-lg font-bold text-app">${product.price}</span>
                     <span className="ml-2 text-xs text-app-text-light line-through">${product.originalPrice}</span>
                   </div>
-                  <button className="rounded-full bg-app-green px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-app-green/90">
+                  <button
+                    type="button"
+                    onClick={() => addToCart(product)}
+                    className="rounded-full bg-app-green px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-app-green/90"
+                  >
                     Add
                   </button>
                 </div>

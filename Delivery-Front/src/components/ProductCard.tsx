@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { useCart } from "../context/CartContext";
 
 type Product = {
     id: number;
@@ -16,6 +17,7 @@ interface Props {
 
 const ProductCard = ({ product }: Props) => {
     const currency = "$";
+    const { addToCart } = useCart();
 
     return (
         <div className="overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:shadow-md">
@@ -49,7 +51,11 @@ const ProductCard = ({ product }: Props) => {
                         {currency}
                         {product.price ?? 0}
                     </span>
-                    <button className="rounded-full bg-app-green px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-app-green/90">
+                    <button
+                        type="button"
+                        onClick={() => addToCart(product)}
+                        className="rounded-full bg-app-green px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-app-green/90"
+                    >
                         Add
                     </button>
                 </div>
