@@ -27,7 +27,8 @@ export default {
 			colors: {
 				app: {
 					DEFAULT: "#1f2937",
-					green: "#0aad0a",
+					green: colors.green[950],
+					"green-light": colors.green[900],
 					cream: "#fff7e6",
 					border: "#e5e7eb",
 					"text-light": "#6b7280"

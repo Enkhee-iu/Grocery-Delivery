@@ -15,7 +15,7 @@ const Banner = () => {
      return (
         <div>
             {bannerVisible && (
-                <div className="bg-gradient-to-r from-app-green via-emerald-800 
+                <div className="bg-gradient-to-r from-app-green via-app-green-light
                 to-app-green text-white text-xs sm:text-sm relative overflow-hidden">
                     <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 px-4 py-2 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2">
