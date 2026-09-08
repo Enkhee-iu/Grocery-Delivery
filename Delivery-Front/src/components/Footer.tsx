@@ -6,6 +6,15 @@ const socials = [
   { icon: Share2, name: "Share", link: "#" },
 ]
 
+const footerSections = [
+  { title: "Company", items: ["About us", "Our stores", "Careers"] },
+  { title: "Support", items: ["Help center", "Shipping", "Returns"] },
+  {
+    title: "Contact",
+    items: ["hello@instacart.com", "+1 (555) 123-4567", "Mon - Sat, 8AM - 9PM"],
+  },
+]
+
 const Footer = () => {
   return (
     <footer className="bg-app-green text-white">
@@ -21,9 +30,9 @@ const Footer = () => {
             </p>
 
             <div className="flex gap-3">
-              {socials.map(({ icon: Icon, name, link }, i) => (
+              {socials.map(({ icon: Icon, name, link }) => (
                 <a
-                  key={`${name}-${i}`}
+                  key={name}
                   href={link}
                   aria-label={name}
                   className="flex size-9 items-center justify-center rounded-lg bg-white/10 transition hover:bg-white/20"
@@ -34,32 +43,16 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-lg font-semibold">Company</h3>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>About us</li>
-              <li>Our stores</li>
-              <li>Careers</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-lg font-semibold">Support</h3>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>Help center</li>
-              <li>Shipping</li>
-              <li>Returns</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-lg font-semibold">Contact</h3>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>hello@instacart.com</li>
-              <li>+1 (555) 123-4567</li>
-              <li>Mon - Sat, 8AM - 9PM</li>
-            </ul>
-          </div>
+          {footerSections.map(({ title, items }) => (
+            <div key={title}>
+              <h3 className="mb-4 text-lg font-semibold">{title}</h3>
+              <ul className="space-y-2 text-sm text-white/70">
+                {items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </footer>
