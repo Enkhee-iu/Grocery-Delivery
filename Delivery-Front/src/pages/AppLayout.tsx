@@ -1,5 +1,6 @@
 import Banner from "$/components/Banner";
 import Footer from "$/components/Footer";
+import CartSidebar from "$/components/Home/CartSidebar";
 import Navbar from "$/components/Navbar";
 import { Outlet } from "react-router-dom";
 
@@ -13,9 +14,9 @@ const AppLayout = () => {
             <Outlet />
          </main>
          <Footer/>
-         <p>cartsidebar</p>
+         <CartSidebar/>
        </>
     )
 }
 
-export default AppLayout; 
+export default AppLayout;
