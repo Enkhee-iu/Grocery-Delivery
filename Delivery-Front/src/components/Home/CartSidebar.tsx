@@ -117,6 +117,12 @@ const CartSidebar = () => {
                 Proceed to checkout
               </Link>
             </footer>
+            <div className="flex justify-between text-base font-semibold border-t border-app-border pt-3">
+              <span>Total</span>
+              <span>{currency}{grandTotal.toFixed(2)}</span>
+
+            </div>
+
           </>
         )}
       </div>
