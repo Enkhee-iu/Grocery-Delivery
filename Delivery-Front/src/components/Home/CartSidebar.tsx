@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { MinusIcon, PlusIcon, ShoppingBagIcon, Trash2Icon, XIcon } from "lucide-react";
 import { useCart } from "$/context/CartContext";
+import { getCartTotals } from "$/lib/cartTotals";
 
 const CartSidebar = () => {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -30,8 +31,7 @@ const CartSidebar = () => {
   }, [isCartOpen]);
 
   const closeCart = () => setIsCartOpen(false);
-  const deliveryFee = items.length === 0 || cartTotal > 20 ? 0 : 1.99;
-  const grandTotal = cartTotal + deliveryFee;
+  const { deliveryFee, total: grandTotal } = getCartTotals(cartTotal, items.length);
   const formatPrice = (amount: number) => `${currency}${amount.toFixed(2)}`;
   const quantityButtonClass = "rounded-lg p-2 transition hover:bg-app-cream";
 
@@ -117,12 +117,6 @@ const CartSidebar = () => {
                 Proceed to checkout
               </Link>
             </footer>
-            <div className="flex justify-between text-base font-semibold border-t border-app-border pt-3">
-              <span>Total</span>
-              <span>{currency}{grandTotal.toFixed(2)}</span>
-
-            </div>
-
           </>
         )}
       </div>
@@ -131,3 +125,14 @@ const CartSidebar = () => {
 };
 
 export default CartSidebar;
+
+
+
+
+const user = {
+  name: "Enkhee",
+  age: 21,
+  skills: ["JavaScript", "React", "Next.js"],
+};
+
+console.log(user.name + "is" + user.age + user.skills[2])
