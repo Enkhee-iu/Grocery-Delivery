@@ -129,10 +129,3 @@ export default CartSidebar;
 
 
 
-const user = {
-  name: "Enkhee",
-  age: 21,
-  skills: ["JavaScript", "React", "Next.js"],
-};
-
-console.log(user.name + "is" + user.age + user.skills[2])
