@@ -46,7 +46,7 @@ const CartSidebar = () => {
       className="fixed inset-y-0 left-auto right-0 m-0 h-dvh max-h-none w-full max-w-md bg-white p-0 text-app shadow-2xl backdrop:bg-black/40"
     >
       <div className="flex h-full flex-col">
-        <header className="flex items-center justify-between gap-3 border-b border-app-border p-5">
+        <header className="flex shrink-0 items-center justify-between gap-3 border-b border-app-border p-5">
           <div className="flex items-center gap-2">
             <ShoppingBagIcon className="size-5" />
             <h2 id="cart-title" className="text-lg font-medium">Your Cart</h2>
@@ -106,7 +106,7 @@ const CartSidebar = () => {
               ))}
             </ul>
 
-            <footer className="space-y-4 border-t border-app-border p-5">
+            <footer className="shrink-0 space-y-4 border-t border-app-border p-5">
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between"><dt>Subtotal</dt><dd>{formatPrice(cartTotal)}</dd></div>
                 <div className="flex justify-between"><dt>Delivery</dt><dd>{deliveryFee === 0 ? "Free" : formatPrice(deliveryFee)}</dd></div>
@@ -125,7 +125,6 @@ const CartSidebar = () => {
 };
 
 export default CartSidebar;
-
 
 
 

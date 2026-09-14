@@ -1,17 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-
-type Product = {
-  id: string | number;
-  name: string;
-  price?: number;
-  image?: string;
-};
-
-type CartItem = {
-  productId: string | number;
-  quantity: number;
-  product: Product;
-};
+import toast from "react-hot-toast";
+import { readCart, type CartItem, type Product } from "$/lib/cartStorage";
 
 interface CartContextType {
   items: CartItem[];
@@ -28,22 +17,25 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>(() => {
-    const saved = localStorage.getItem("app_cart");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [items, setItems] = useState<CartItem[]>(readCart);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("app_cart", JSON.stringify(items));
+    try {
+      localStorage.setItem("app_cart", JSON.stringify(items));
+    } catch {
+      toast.error("Your cart could not be saved. Changes may be lost when you reload.", { id: "cart-storage" });
+    }
   }, [items]);
 
   const addToCart = (product: Product, quantity: number = 1) => {
+    if (!Number.isSafeInteger(quantity) || quantity <= 0) return;
     setItems((prevItems: CartItem[]) => {
       const existingItem = prevItems.find((item: CartItem) => item.productId === product.id);
 
       if (existingItem) {
+        if (!Number.isSafeInteger(existingItem.quantity + quantity)) return prevItems;
         return prevItems.map((item: CartItem) =>
           item.productId === product.id ? { ...item, quantity: item.quantity + quantity } : item
         );
@@ -59,6 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const updateQuantity = (productId: string | number, quantity: number) => {
+    if (!Number.isSafeInteger(quantity)) return;
     if (quantity <= 0) {
       removeFromCart(productId);
       return;

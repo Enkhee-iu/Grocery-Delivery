@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle2Icon, ShoppingBagIcon } from "lucide-react";
 import { useCart } from "$/context/CartContext";
@@ -14,6 +14,9 @@ const Checkout = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submitting = useRef(false);
+  useEffect(() => {
+    if (items.length > 0) setConfirmedOrder(null);
+  }, [items]);
   const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "$";
   const totals = getCartTotals(cartTotal, items.length);
   const formatPrice = (amount: number) => `${currency}${amount.toFixed(2)}`;
