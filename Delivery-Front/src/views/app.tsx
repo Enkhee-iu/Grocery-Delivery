@@ -1,7 +1,7 @@
 import AppLayout from '$/pages/AppLayout';
 import Login from '$/pages/Login';
 import { Toaster } from 'react-hot-toast';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import Home from '$/pages/Home';
 import Products from '$/pages/Products';
 import ProductPage from '$/pages/ProductPage';
@@ -29,6 +29,13 @@ const App = () => {
         <Route path="products/:id" element={<ProductPage />} />
         <Route path="flash-deals" element={<FlashDeals />} />
         <Route path="search" element={<SearchResults />} />
+        <Route path="*" element={
+          <section className="mx-auto max-w-xl px-5 py-16 text-center text-app">
+            <h1 className="font-semibold">Page not found</h1>
+            <p className="mt-3 text-app-text-light">This page does not exist.</p>
+            <Link to="/" className="mt-6 inline-block rounded-xl bg-app-green px-5 py-3 font-semibold text-white">Back to home</Link>
+          </section>
+        } />
         <Route element={<ProtectedRoute />}>
           <Route path="checkout" element={<Checkout />} />
           <Route path="orders" element={<MyOrders />} />

@@ -1,5 +1,5 @@
 import { ArrowUpRightIcon, BikeIcon, ChevronDownIcon, LogOutIcon, MapPinIcon, MenuIcon, PackageIcon, SearchIcon, ShieldIcon, ShoppingCartIcon, UserIcon, XIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
@@ -14,6 +14,18 @@ const Navbar = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!userMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setUserMenuOpen(false);
+        menuTriggerRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [userMenuOpen]);
   const navigate = useNavigate();
   const dropdownLinkClassName = "flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-700 transition-colors hover:bg-zinc-50";
 
@@ -54,6 +66,7 @@ const Navbar = () => {
               <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-500" />
               <input
                 type="text"
+                aria-label="Search for groceries"
                 placeholder="Search for groceries..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -81,6 +94,10 @@ const Navbar = () => {
               {user ? (
                 <button
                   type="button"
+                  ref={menuTriggerRef}
+                  aria-label="Account navigation"
+                  aria-expanded={userMenuOpen}
+                  aria-controls="account-navigation"
                   onClick={() => setUserMenuOpen((isOpen) => !isOpen)}
                   className="flex items-center gap-2 p-2"
                 >
@@ -98,17 +115,16 @@ const Navbar = () => {
                   >
                     <UserIcon size={16}/> Sign In
                   </Link>
-                  {userMenuOpen ? <XIcon className="md:hidden"
-                  onClick={() => setUserMenuOpen((isOpen) => !isOpen)} /> :
-                  <MenuIcon className="md:hidden" onClick={() =>
-                    setUserMenuOpen((isOpen) => !isOpen)} />}
+                  <button type="button" ref={menuTriggerRef} aria-label="Toggle navigation" aria-expanded={userMenuOpen} aria-controls="account-navigation" className="rounded-lg p-2 md:hidden" onClick={() => setUserMenuOpen((isOpen) => !isOpen)}>
+                    {userMenuOpen ? <XIcon /> : <MenuIcon />}
+                  </button>
                 </div>
             )}
 
             {userMenuOpen && (
                 <>
                 <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
-                        <div className="absolute right-0 top-full z-50 mt-2 w-56 rounded-xl border border-zinc-200 bg-white py-2 shadow-lg">
+                        <div id="account-navigation" className="absolute right-0 top-full z-50 mt-2 w-56 rounded-xl border border-zinc-200 bg-white py-2 shadow-lg">
                             {user && (
                                 <div className="border-b border-zinc-200 px-4 py-2">
                                     <p className="text-sm font-medium text-zinc-900">{user?.name}</p>
@@ -126,11 +142,11 @@ const Navbar = () => {
                               {user && <Link to="/addresses" className={dropdownLinkClassName}><MapPinIcon
                               size={16}/>Addresses</Link>}
 
-                              {user && <Link to="/products" className={dropdownLinkClassName}><ArrowUpRightIcon
-                              size={16}/>Products</Link>}
+                              <Link to="/products" className={dropdownLinkClassName}><ArrowUpRightIcon
+                              size={16}/>Products</Link>
 
-                                {user && <Link to="/flash-deals" className={dropdownLinkClassName}><ArrowUpRightIcon
-                              size={16}/>Deals</Link>}
+                              <Link to="/flash-deals" className={dropdownLinkClassName}><ArrowUpRightIcon
+                              size={16}/>Deals</Link>
                               {user?.isAdmin && (
                                 <Link to="/admin/products" className={dropdownLinkClassName}><ShieldIcon
                                 className="text-orange-600" size={16}/>

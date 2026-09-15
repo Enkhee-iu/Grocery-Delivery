@@ -29,6 +29,7 @@ const dummyProducts: Product[] = [
 ]
 
 const PopularProducts = () => {
+  const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "$"
   const products = dummyProducts.slice(0, 10)
   const { addToCart } = useCart()
 
@@ -58,10 +59,10 @@ const PopularProducts = () => {
                   <span className="font-medium text-app">{product.rating}</span>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <span className="text-lg font-bold text-app">${product.price}</span>
-                    <span className="ml-2 text-xs text-app-text-light line-through">${product.originalPrice}</span>
+                    <span className="text-lg font-bold text-app">{currency}{product.price}</span>
+                    <span className="ml-2 text-xs text-app-text-light line-through">{currency}{product.originalPrice}</span>
                   </div>
                   <button
                     type="button"

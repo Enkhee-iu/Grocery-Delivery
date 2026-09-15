@@ -16,7 +16,7 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
-    const currency = "$";
+    const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "$";
     const { addToCart } = useCart();
 
     return (
@@ -28,7 +28,7 @@ const ProductCard = ({ product }: Props) => {
                     className="h-full w-full object-cover p-4 transition-all duration-300 hover:p-2"
                 />
 
-                {product.discount && product.discount > 0 && (
+                {product.discount != null && product.discount > 0 && (
                     <div className="absolute left-3 top-3 rounded-full bg-orange-500 px-2 py-1 text-[10px] font-semibold uppercase text-white">
                         {product.discount}% OFF
                     </div>
@@ -38,7 +38,7 @@ const ProductCard = ({ product }: Props) => {
             <div className="p-3 text-zinc-700">
                 <h3 className="mb-2 text-sm font-medium leading-snug text-app">{product.name}</h3>
 
-                {product.rating && product.rating > 0 && (
+                {product.rating != null && product.rating > 0 && (
                     <div className="mb-2 flex items-center gap-1">
                         <Star className="size-3 fill-amber-400 text-amber-400" />
                         <span className="text-xs font-medium text-app">{product.rating}</span>
