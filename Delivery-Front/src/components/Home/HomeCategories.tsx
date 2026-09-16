@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 import fruitsVegetables from "../../assets/fruits_vegetables.png"
@@ -34,9 +35,9 @@ const HomeCategories = () => {
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-9">
           {categories.map((cat) => (
-            <a
+            <Link
               key={cat.slug}
-              href={`/products?category=${cat.slug}`}
+              to={`/products?category=${cat.slug}`}
               onClick={() => window.scrollTo(0, 0)}
               className="group flex flex-col items-center gap-3 rounded-2xl p-3 transition-all hover:translate-y-[-2px]"
             >
@@ -49,7 +50,7 @@ const HomeCategories = () => {
               </div>
               <span className="text-center text-sm font-medium text-app">{cat.name}</span>
               
-            </a>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,9 +1,1 @@
-
-
-const SearchResults = () => {
-    return (
-        <div>SearchResult</div>
-    )
-}
-
-export default SearchResults
+export { default } from "./Products";
