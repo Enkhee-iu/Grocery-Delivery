@@ -69,6 +69,7 @@ const Checkout = () => {
       <p className="mt-5 break-all text-sm">Order ID: {confirmedOrder.id}</p>
       <p className="mt-2 font-semibold">Total: {confirmedOrder.currency}{confirmedOrder.total.toFixed(2)}</p>
       <Link to="/orders" className={`${buttonClass} mt-6`}>View my orders</Link>
+      <Link to={`/orders/${encodeURIComponent(confirmedOrder.id)}`} className="mt-4 block font-medium underline">View this order</Link>
     </section>
   );
 

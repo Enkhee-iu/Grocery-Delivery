@@ -19,6 +19,7 @@ const MyOrders = () => {
           {result.orders.map((order) => (
             <article key={order.id} className="rounded-2xl border border-app-border bg-white p-6">
               <h2 className="break-all text-base font-semibold">Order {order.id}</h2>
+              <Link to={`/orders/${encodeURIComponent(order.id)}`} className="mt-2 inline-block text-sm font-medium text-app-green underline" aria-label={`View details for order ${order.id}`}>View order details</Link>
               <p className="mt-1 text-sm text-app-text-light">{new Date(order.createdAt).toLocaleString()} · Saved locally</p>
               <ul className="my-4 divide-y divide-app-border">
                 {order.items.map((item, index) => <li key={index} className="flex justify-between gap-4 py-3"><span>{item.name} × {item.quantity}</span><span>{order.currency}{(item.price * item.quantity).toFixed(2)}</span></li>)}
