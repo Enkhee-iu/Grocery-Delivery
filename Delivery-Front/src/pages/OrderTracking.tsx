@@ -26,7 +26,7 @@ const OrderTracking = () => {
           <p className="mt-2 break-all text-sm text-app-text-light">Order {order.id}</p>
           <p className="mt-1 text-sm text-app-text-light"><time dateTime={order.createdAt}>{new Date(order.createdAt).toLocaleString()}</time></p>
           <div className="my-6 rounded-2xl bg-app-cream p-5">
-            <p className="flex items-center gap-2 font-semibold"><CheckCircle2Icon className="size-5 text-app-green" />Demo order saved</p>
+            <p className="flex items-center gap-2 font-semibold"><CheckCircle2Icon className="size-5 text-app-green" />{order.status ?? 'Pending'}</p>
             <p className="mt-2 text-sm">Saved in this browser only. This order has not been sent to a store. Live delivery tracking is not available.</p>
           </div>
           <div className="rounded-2xl border border-app-border bg-white p-6">

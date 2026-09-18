@@ -5,11 +5,12 @@ import App from "./views/app";
 import "./styles/index.css";
 import Hero from "./components/Home/Hero";
 import { CartProvider } from "./context/CartContext";
+import { CatalogProvider } from "./context/CatalogContext";
 
 createRoot(document.getElementById("app")!).render(
   <BrowserRouter>
-  <CartProvider>
+  <CatalogProvider><CartProvider>
     <App />
-  </CartProvider>
+  </CartProvider></CatalogProvider>
   </BrowserRouter>
 );

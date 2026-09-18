@@ -12,6 +12,7 @@ import MyOrders from '$/pages/MyOrders';
 import OrderTracking from '$/pages/OrderTracking';
 import Addresses from '$/pages/Addresses';
 import ProtectedRoute from '$/components/ProtectedRoute';
+import { AdminLayout, AdminOverview, AdminProducts, AdminOrders } from '$/pages/Admin';
 
 
 const App = () => {
@@ -22,6 +23,11 @@ const App = () => {
          borderRadius: '12px', fontSize: '14px' } }}  />
 
     <Routes>
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminOverview />} />
+        <Route path="products" element={<AdminProducts />} />
+        <Route path="orders" element={<AdminOrders />} />
+      </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Home />} />

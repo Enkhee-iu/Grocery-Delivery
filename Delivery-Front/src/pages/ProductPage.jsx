@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
-import { products } from "$/data/products";
+import { useCatalog } from "$/context/CatalogContext";
 import { useCart } from "$/context/CartContext";
 
 const ProductPage = () => {
+  const { products } = useCatalog();
   const { id } = useParams();
   const { addToCart } = useCart();
   const product = products.find(item => String(item.id) === id);

@@ -1,10 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import ProductCard from "$/components/ProductCard";
-import { products } from "$/data/products";
+import { useCatalog } from "$/context/CatalogContext";
 import { filterProducts } from "$/lib/filterProducts";
 
 const controlClass = "mt-2 w-full rounded-xl border border-app-border bg-white px-4 py-3";
 const Products = ({ dealsOnly = false }: { dealsOnly?: boolean }) => {
+  const { products } = useCatalog();
   const [params, setParams] = useSearchParams();
   const search = params.get("search") ?? params.get("q") ?? "";
   const category = params.get("category") ?? "";

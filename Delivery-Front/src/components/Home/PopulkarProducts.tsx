@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard";
-import { products } from "$/data/products";
+import { useCatalog } from "$/context/CatalogContext";
 
-const PopularProducts = () => (
+const PopularProducts = () => {
+  const { products } = useCatalog();
+  return (
   <section className="mx-auto max-w-[1440px] px-4 pb-16 sm:px-6">
     <div className="mb-8 flex items-center justify-between gap-4">
       <div><h2 className="text-2xl font-semibold text-app">Popular Products</h2><p className="mt-1 text-sm text-app-text-light">Top-rated products this season</p></div>
@@ -12,5 +14,5 @@ const PopularProducts = () => (
       {products.map(product => <ProductCard key={product.id} product={product} />)}
     </div>
   </section>
-);
+); };
 export default PopularProducts;
